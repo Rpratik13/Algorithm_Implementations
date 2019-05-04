@@ -1,19 +1,24 @@
-def partition(array: list, pivot: int) -> list:
-	lesser = list()
-	greater = list()
-	for elem in array:
-		if elem < pivot:
-			lesser.append(elem)
-		else:
-			greater.append(elem)
-	
-	return quickSort(lesser) + [pivot] + quickSort(greater)
+def partition(array: list) -> list:
+	i = 1
+	j = len(array) - 1
+	while i < j:
+		while array[i] < array[0]:
+			i += 1
+
+		while array[j] > array[0]:
+			j -= 1
+
+		if i < j:
+			array[i], array[j] = array[j], array[i]
+
+	array[j], array[0] = array[0], array[j]
+
+	return quickSort(array[:j]) + [array[j]] + quickSort(array[j + 1:])
 
 
 def quickSort(array: list) -> list:
 	if len(array) > 1:
-		pivot = array[0]
-		return partition(array[1:], pivot)
+		return partition(array)
 	return array
 
 
