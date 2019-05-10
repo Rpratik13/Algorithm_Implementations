@@ -5,7 +5,6 @@ def selectionSort(array: list) -> list:
 			if array[j] < array[minIndex]:
 				minIndex = j
 		array[i], array[minIndex] = array[minIndex], array[i]
-	return array
 
 
 def recursiveSelectionSort(array: list) -> list:
@@ -15,12 +14,14 @@ def recursiveSelectionSort(array: list) -> list:
 			if array[index] < array[minIndex]:
 				minIndex = index
 		array[0], array[minIndex] = array[minIndex], array[0]
-		array = array[:1] + selectionSort(array[1:])
+		array = array[:1] + recursiveSelectionSort(array[1:])
 	return array
 
 
 if __name__ == '__main__':
-	array = random.sample(range(1, 1000), 500)
-	print(selectionSort(array))
+	# array = random.sample(range(1, 1000), 500)
+	array = [5, 3, 2, 10 , 1 , 9]
+	selectionSort(array)
+	print(array)
 	print(recursiveSelectionSort(array))
 	

@@ -1,35 +1,24 @@
-from countingSort import countingSort
-from radixSort import radixSort
-from bucketSort import bucketSort
-import matplotlib.pyplot as plt
 import time
 
+arr = [1, 2, 3, 4, 5, 6, 7, 8]
 
-if __name__ == "__main__":
-	n = 100000
-	num = list()
-	times = list()
-	x = time.time()
-	print(x)
-	for i in range(n, n * 10 + 1, n):
-		array = list(range(i))[::-1]
-		# start_time = time.time()
-		# temp = countingSort(array)
-		# end_time = time.time()
+def BinarySearch(arr, l, r, x):
+    # here l indicates the lest most index of array
+    # r indicates the right most index of the array
+    while l<=r:
+        mid = l + (r-l)//2
+        # mid should be always equal to integer so (r-1)//2 
+        if arr[mid] == x:
+            return mid
+        elif arr[mid] < x:
+            l = mid+1
+        else:
+            r = mid-1
+    return -1
 
 
-		# print("For counting sort: {}".format(end_time - start_time))
-		# start_time = time.time()
-		# temp = radixSort(array)
-		# end_time = time.time()
-		# print("For radix sort: {}".format(end_time - start_time))
+start = time.time()
 
-		# start_time = time.time()
-		# temp = bucketSort(array)
-		# end_time = time.time()
-		# print("For bucket sort: {}\n".format(end_time - start_time))
-		# times.append(end_time - start_time)
-		# num.append(i)
-
-	# plt.plot(times)
-	# plt.show()	
+print(BinarySearch(arr,0, len(arr) - 1, 1))
+end = time.time()
+print(end-start)

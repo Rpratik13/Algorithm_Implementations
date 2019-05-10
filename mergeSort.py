@@ -9,11 +9,10 @@ def merge(left: list, right: list) -> list:
 			merged.append(right[rightIndex])
 			rightIndex += 1
 
-	for i in range(leftIndex, len(left)):
-		merged.append(left[i])
-
-	for i in range(rightIndex, len(right)):
-		merged.append(right[i])
+	if leftIndex < len(left):
+		merged.extend(left[leftIndex:])
+	else:
+		merged.extend(right[rightIndex:])
 
 	return merged
 
