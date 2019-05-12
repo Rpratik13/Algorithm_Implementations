@@ -60,8 +60,6 @@ class BinarySearchTree:
 			
 
 	def height(self):
-		if self.root == None:
-			return 0
 		return self._height(self.root, current_height=0)
 
 
@@ -126,12 +124,16 @@ class BinarySearchTree:
 				self.delete(max_val)
 				current_node.value = max_val
 			elif current_node.left != None:
-				if current_node.parent.left.value == key:
+				if current_node == self.root:
+					self.root = self.root.left
+				elif current_node.parent.left.value == key:
 					current_node.parent.left = current_node.left
 				else:
 					current_node.parent.right = current_node.left
 			elif current_node.right != None:
-				if current_node.parent.left.value == key:
+				if current_node == self.root:
+					self.root = self.root.right
+				elif current_node.parent.left.value == key:
 					current_node.parent.left = current_node.right
 				else:
 					current_node.parent.right = current_node.right
@@ -143,10 +145,15 @@ class BinarySearchTree:
 				else:
 					current_node.parent.right = None
 		elif current_node.value < key:
-			return self._delete(current_node.right, key)
+			if current_node.right != None:
+				return self._delete(current_node.right, key)
+			else:
+				print('{} not in tree.'.format(key))
 		else:
-			return self._delete(current_node.left, key)
-
+			if current_node.left != None:
+				return self._delete(current_node.left, key)
+			else:
+				print('{} not in tree.'.format(key))
 
 class Node:
 	def __init__(self, value):
@@ -157,12 +164,12 @@ class Node:
 
 
 if __name__ == '__main__':
-	# array = [4, 3, 2, 1]
-	array = [100, 50, 150, 30, 70, 10, 5, 15, 12, 11, 40, 60, 80]
+	array = [4, 3, 5]
+	# array = [100, 50, 150, 30, 70, 10, 5, 15, 12, 11, 40, 60, 80]
 	bt = BinarySearchTree()
 	# print(type(bt))
 	for i in array:
 		bt.insert(i)
-	bt.delete(30)
+	bt.delete(4)
 	bt.traverse('pre')
 	# bt.traverse
