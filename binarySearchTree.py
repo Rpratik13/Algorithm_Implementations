@@ -15,11 +15,13 @@ class BinarySearchTree:
 		if value < current_node.value:
 			if current_node.left == None:
 				current_node.left = Node(value)
+				current_node.left.parent = current_node
 			else:
 				return self._insert(value, current_node.left)
 		elif value > current_node.value:
 			if current_node.right == None:
 				current_node.right = Node(value)
+				current_node.right.parent = current_node
 			else:
 				return self._insert(value, current_node.right)
 		else:
@@ -123,46 +125,44 @@ class BinarySearchTree:
 				max_val = self._largestKey(current_node.left)
 				self.delete(max_val)
 				current_node.value = max_val
-
 			elif current_node.left != None:
-				current_node = current_node.left
-
+				if current_node.parent.left.value == key:
+					current_node.parent.left = current_node.left
+				else:
+					current_node.parent.right = current_node.left
 			elif current_node.right != None:
-				current_node = current_node.right
-
+				if current_node.parent.left.value == key:
+					current_node.parent.left = current_node.right
+				else:
+					current_node.parent.right = current_node.right
 			else:
-				current_node = None
-
+				if current_node == self.root:
+					self.root = None
+				elif current_node.parent.left.value == key:
+					current_node.parent.left = None
+				else:
+					current_node.parent.right = None
 		elif current_node.value < key:
-			if current_node.left != None:
-				if current_node.left.value == key:
-					current_node.left = current_node.left.right
-				else:
-					return self._delete(current_node.right, key)
-			else:
-				return 'Key not found'
+			return self._delete(current_node.right, key)
 		else:
-			if current_node.right != None:
-				if current_node.right.value == key:
-					current_node.right = current_node.right.left
-				else:
-					return self._delete(current_node.left, key)
-			else:
-				return 'Key not found'
+			return self._delete(current_node.left, key)
+
 
 class Node:
 	def __init__(self, value):
 		self.value = value
+		self.parent = None
 		self.left = None
 		self.right = None
 
 
 if __name__ == '__main__':
+	# array = [4, 3, 2, 1]
 	array = [100, 50, 150, 30, 70, 10, 5, 15, 12, 11, 40, 60, 80]
 	bt = BinarySearchTree()
 	# print(type(bt))
 	for i in array:
 		bt.insert(i)
-	bt.delete(5)
+	bt.delete(30)
 	bt.traverse('pre')
 	# bt.traverse
