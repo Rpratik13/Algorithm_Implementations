@@ -426,22 +426,25 @@ class BinarySearchTree:
 
 
 if __name__ == '__main__':
-	array = [5, 34, 14, 134, 4, 6, 9 , 23, 235, 2341, 1]
-	# array = list(range(5))
-	# array = [100, 50, 150, 30, 70, 10, 5, 15, 12, 11, 40, 60, 80]
+	array = [5, 34, 14, 134, 4, 6, 9, 23, 235, 2341, 1]
 	bt = BinarySearchTree()
-	# print(type(bt))
+
 	for i in array:
+		# Insert Modes: recursive (default), iterative
 		bt.insert(i, mode='recursive')
-	print(bt.size)
+
+	# Search Modes: recursive (default), iterative
+	# bt.search(5)
+
+	# Smallest key Modes: recursive (default), iterative
+	# bt.smallestKey()
+
+	# Largest Key Modes: recursive (default), iterative
+	# bt.largestKey()
+
+	# Delete Modes: recursive (default), iterative
 	# bt.delete(5, mode='recursive')
 	
-	bt.delete(5, mode='iterative')
-	print(bt.size)
-	print('')
-	# bt.search(4, mode='iterative')
-	# print(bt.smallestKey(mode='iterative'))
+	# Traverse Orders: pre (default), in, post
+	# Traverse Modes: recursive (default), iterative
 	bt.traverse(order='post', mode='recursive')
-	print(' ')
-	bt.traverse(order='post', mode='iterative')
-	# bt.traverse
