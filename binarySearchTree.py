@@ -1,3 +1,5 @@
+import random
+
 class Node:
 	def __init__(self, value):
 		self.value = value
@@ -420,13 +422,12 @@ class BinarySearchTree:
 				if len(traversed) == self.size:
 					break
 
-			# if (current_node.left == None or current_node.left.value in traversed) and (current_node.right == None or current_node.right.value in traversed):
 			current_node = current_node.parent
-				# print(current_node.value)
 
 
 if __name__ == '__main__':
-	array = [5, 34, 14, 134, 4, 6, 9, 23, 235, 2341, 1]
+	array = random.sample(range(1, 101), 10)
+	print('array = {} \n'.format(array))
 	bt = BinarySearchTree()
 
 	for i in array:
@@ -447,4 +448,4 @@ if __name__ == '__main__':
 	
 	# Traverse Orders: pre (default), in, post
 	# Traverse Modes: recursive (default), iterative
-	bt.traverse(order='post', mode='recursive')
+	bt.traverse(order='pre', mode='recursive')

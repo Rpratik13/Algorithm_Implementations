@@ -1,24 +1,11 @@
-import time
+import unittest
+from linearSearch import *
 
-arr = [1, 2, 3, 4, 5, 6, 7, 8]
-
-def BinarySearch(arr, l, r, x):
-    # here l indicates the lest most index of array
-    # r indicates the right most index of the array
-    while l<=r:
-        mid = l + (r-l)//2
-        # mid should be always equal to integer so (r-1)//2 
-        if arr[mid] == x:
-            return mid
-        elif arr[mid] < x:
-            l = mid+1
-        else:
-            r = mid-1
-    return -1
+class TestLinearSearch(unittest.TestCase):
+    def testSearch(self):
+        array = [4, 5, 0, 1, 10, 11, 15]
+        self.assertEqual(linearSearch(array, 10), 4)
 
 
-start = time.time()
-
-print(BinarySearch(arr,0, len(arr) - 1, 1))
-end = time.time()
-print(end-start)
+if __name__ == '__main__':
+    unittest.main()
